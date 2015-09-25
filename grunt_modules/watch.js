@@ -39,7 +39,7 @@ module.exports = (function() {
     moduleWatchTasks['js-' + moduleName] = {
       files: modulePaths.src.concat(modulePaths.templates.dest),
       tasks: [
-        'jshint',
+        'eslint:' + moduleName,
         'concat:' + moduleName,
         'karma:' + moduleName
       ]
@@ -47,6 +47,7 @@ module.exports = (function() {
     moduleWatchTasks['tests-' + moduleName] = {
       files: modulePaths.spec,
       tasks: [
+        'eslint:' + moduleName,
         'karma:' + moduleName
       ]
     };

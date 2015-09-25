@@ -7,6 +7,7 @@ module.exports = (function() {
     MODULE_SRC: _.template('src/app/<%= moduleName %>/**/*.module.js'),
     DEST: _.template('generated/dist/js/<%= moduleName %>.js'),
     SRC_WITHOUT_SPEC: _.template('src/app/<%= moduleName %>/**/!(*.spec).js'),
+    ANY_JS: _.template('src/app/<%= moduleName %>/**/*.js'),
     TEST_SPEC: _.template('src/app/<%= moduleName %>/**/*.spec?(.config).js'),
     TEMPLATE_SRC: _.template('src/app/<%= moduleName %>/**/*.html'),
     TEMPLATE_DEST: _.template('generated/.tmp/templates/templates-<%= moduleName %>.js')
@@ -17,6 +18,7 @@ module.exports = (function() {
     this.src = [CONSTANTS.MODULE_SRC(this), CONSTANTS.SRC_WITHOUT_SPEC(this)];
     this.dest = CONSTANTS.DEST(this);
     this.spec = [CONSTANTS.TEST_SPEC(this)];
+    this.anyJs = [CONSTANTS.ANY_JS(this)];
     this.dependencies = [];
   }
 
@@ -36,10 +38,7 @@ module.exports = (function() {
 
   var config = {
     'npmComponents': [
-      'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/angular/angular.min.js',
-      'node_modules/angular-route/angular-route.min.js',
-      'node_modules/underscore/underscore-min.js'
+      'node_modules/angular/angular.min.js'
     ],
     'npmDevComponents': [
       'node_modules/angular-mocks/angular-mocks.js'

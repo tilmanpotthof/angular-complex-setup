@@ -4,13 +4,14 @@ module.exports = function (grunt) {
   var path = require('path');
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('gruntify-eslint');
+
   require('load-grunt-config')(grunt, {
     // path to task.js files, defaults to grunt dir
     configPath: path.join(process.cwd(), 'grunt_modules')
   });
 
   grunt.registerTask('build', [
-    'jshint',
     'clean',
     'ngtemplates',
     'concat',
@@ -18,6 +19,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('dev', [
+    'eslint:dev',
     'test',
     'build',
     'apimocker',
@@ -39,6 +41,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'deps-ok',
+    'eslint:prod',
     'test',
     'build',
     'karma:dist'
