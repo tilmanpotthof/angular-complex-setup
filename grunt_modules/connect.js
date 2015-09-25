@@ -1,19 +1,27 @@
 module.exports = {
 	server: {
     options: {
-      open: 'http://localhost:8000/example-pages/',
+      port: 8181,
+      open: 'http://localhost:8181/example-pages/',
       middleware: function (connect, options) {
         'use strict';
 
-        var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
-        return [
-          // Include the proxy first
-          proxy,
-          // Serve static files.
-          connect.static(options.base[0]),
-          // Make empty directories browsable.
-          connect.directory(options.base[0])
-        ];
+        var serveStatic = require('serve-static');
+
+
+        if (!Array.isArray(options.base)) {
+          options.base = [options.base];
+        }
+
+        // Setup the proxy
+        var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
+
+        // Serve static files.
+        options.base.forEach(function(base) {
+          middlewares.push(serveStatic(base));
+        });
+
+        return middlewares;
       }
     },
     proxies: [
