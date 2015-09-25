@@ -39,6 +39,11 @@ module.exports = function (grunt) {
     'karma:all'
   ]);
 
+  grunt.registerTask('minify', [
+    'ngAnnotate',
+    'uglify'
+  ]);
+
   grunt.registerTask('default', [
     'deps-ok',
     'eslint:prod',
