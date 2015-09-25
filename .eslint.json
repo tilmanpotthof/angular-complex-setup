@@ -1,6 +1,8 @@
 {
   "globals": {
-    "angular": false
+    "angular": false,
+    "module": false, // ng-mocks
+    "inject": false // ng-mocks
   },
   "plugins": [
     "angular",

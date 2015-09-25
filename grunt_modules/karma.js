@@ -4,39 +4,57 @@ module.exports = (function() {
   var config = require('./config/config.js');
   var _ = require('underscore');
 
-  var karma = {
+  function getTestsourcePaths (module, circularityCheck) {
+    circularityCheck = circularityCheck || [];
+    var dependencies = module.dependencies;
+    var sourcePaths = module.src.concat(module.templates.dest);
+
+    circularityCheck.push(module.moduleName);
+    dependencies.forEach(function (dependency) {
+      if (!_.contains(circularityCheck, dependency)) {
+        sourcePaths = sourcePaths.concat(getTestsourcePaths(config.modules[dependency], circularityCheck));
+      }
+    });
+
+    return sourcePaths;
+  }
+
+  function getModuleTestfiles(module) {
+    return config.npmComponents
+      .concat(config.npmDevComponents)
+      .concat(module.src)
+      .concat(module.templates.dest)
+      .concat(getTestsourcePaths(module))
+      .concat(module.spec);
+  }
+
+  function getModuleMinTestfiles(module) {
+    return config.npmComponents
+      .concat(config.npmDevComponents)
+      .concat(module.minDest)
+      .concat(module.spec);
+  }
+
+  var karmaTasks = {
     all: {
       options: {
         configFile: 'karma.conf.js',
+        coverageReporter: {
+          reporters: [
+            {type: 'text', dir: 'generated/reports/coverage'},
+            {type: 'lcov', dir: 'generated/reports/covlerage/lcov/all'}
+          ]
+        },
         files: config.npmComponents
           .concat(config.npmDevComponents)
-          .concat(
-          config.all,
-          config.allSpec
-        )
-      }
-    },
-    dist: {
-      options: {
-        configFile: 'karma.conf.js',
-        files: [
-          'generated/dist/js/vendor.js',
-          'generated/dist/js/app.js',
-          'node_modules/angular-mocks/angular-mocks.js'
-        ].concat(
-          config.allSpec
-        ),
-        preprocessors: {
-          'generated/dist/js/app.js': 'coverage'
-        }
+          .concat(config.all)
+          .concat(config.allSpec)
       }
     }
   };
 
-  var moduleKarmaTasks = {};
-
-  _.each(config.modules, function(modulePaths, moduleName) {
-    moduleKarmaTasks[moduleName] = {
+  _.each(config.modules, function (modulePaths, moduleName) {
+    karmaTasks[moduleName] = {
       options: {
         configFile: 'karma.conf.js',
         coverageReporter: {
@@ -45,19 +63,20 @@ module.exports = (function() {
             {type: 'lcov', dir: 'generated/reports/coverage/lcov/' + moduleName}
           ]
         },
-        files: config.npmComponents
-          .concat(config.npmDevComponents)
-          .concat(
-          modulePaths.src,
-          modulePaths.templates.dest,
-          _.flatten(modulePaths.dependencies.map(function(dependency) {
-            return config.modules[dependency].src.concat(config.modules[dependency].templates.dest);
-          })),
-          modulePaths.spec
-        )
+        files: getModuleTestfiles(modulePaths)
+      }
+    };
+
+    karmaTasks[moduleName + 'Min'] = {
+      options: {
+        configFile: 'karma.conf.js',
+        coverageReporter: {
+          reporters: []
+        },
+        files: getModuleMinTestfiles(modulePaths)
       }
     };
   });
 
-  return _.extend(karma, moduleKarmaTasks);
+  return karmaTasks;
 })();
