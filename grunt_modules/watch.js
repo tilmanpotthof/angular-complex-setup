@@ -16,7 +16,7 @@ module.exports = (function() {
     },
     docs: {
       files: [
-        'src/app/**/*.js'
+        'src/**/*.js'
       ],
       tasks: [
         'ngdocs'
@@ -35,24 +35,30 @@ module.exports = (function() {
 
   var moduleWatchTasks = {};
 
-  _.each(config.modules, function (modulePaths, moduleName) {
+  _.each(config.modules, function (module, moduleName) {
     moduleWatchTasks['js-' + moduleName] = {
-      files: modulePaths.src.concat(modulePaths.templates.dest),
+      files: module.getSources(),
       tasks: [
-        'eslint:' + moduleName,
+        'eslint:' + moduleName + 'Dev',
         'concat:' + moduleName,
+        'ugglify:' + moduleName,
         'karma:' + moduleName
       ]
     };
     moduleWatchTasks['tests-' + moduleName] = {
-      files: modulePaths.spec,
+      files: module.spec,
       tasks: [
-        'eslint:' + moduleName,
+        'eslint:' + moduleName + 'Dev',
         'karma:' + moduleName
       ]
     };
+
+    if (!module.hasTemplates()) {
+      return;
+    }
+
     moduleWatchTasks['templates-' + moduleName] = {
-      files: modulePaths.templates.src,
+      files: module.templates.src,
       tasks: [
         'ngtemplates:' + moduleName
       ]

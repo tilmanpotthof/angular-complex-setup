@@ -7,7 +7,7 @@ module.exports = (function () {
   var eslintConfig = {
     dev: {
       src: [
-        'src/app/**/*.js'
+        'src/**/*.js'
       ],
       options: {
         configFile: '.eslint-dev.json'
@@ -16,7 +16,7 @@ module.exports = (function () {
 
     prod: {
       src: [
-        'src/app/**/*.js'
+        'src/**/*.js'
       ],
       options: {
         configFile: '.eslint.json'

@@ -2,6 +2,8 @@ module.exports = function (grunt) {
   'use strict';
 
   var path = require('path');
+  var config = require('./grunt_modules/config/config');
+
   require('time-grunt')(grunt);
 
   grunt.loadNpmTasks('gruntify-eslint');
@@ -34,21 +36,24 @@ module.exports = function (grunt) {
     'watch:docs'
   ]);
 
-  grunt.registerTask('test', [
-    'ngtemplates',
-    'karma:all'
-  ]);
 
   grunt.registerTask('minify', [
     'ngAnnotate',
     'uglify'
   ]);
 
+  grunt.registerTask('test', [
+    'ngtemplates'
+  ].concat(config.mapModulesWithTemplate('karma:<%= moduleName %>')));
+
+  grunt.registerTask('test-min', config.mapModulesWithTemplate('karma:<%= moduleName %>Min'));
+
   grunt.registerTask('default', [
     'deps-ok',
     'eslint:prod',
     'test',
     'build',
-    'karma:dist'
+    'minify',
+    'test-min'
   ]);
 };

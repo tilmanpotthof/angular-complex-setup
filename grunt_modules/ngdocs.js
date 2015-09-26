@@ -5,12 +5,12 @@ module.exports = {
     scripts: [
       '//localhost:35729/livereload.js',
       'generated/dist/js/vendor.js',
-      'generated/dist/js/app.js'
+      'generated/dist/js/demoApp.js'
     ],
     styles: [
     ],
     editExample: false,
     sourceLink: true
   },
-  all: ['src/app/**/*.js']
+  all: ['src/**/*.js']
 };

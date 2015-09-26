@@ -4,17 +4,20 @@ module.exports = function() {
   var _ = require('underscore');
   var config = require('./config/config.js');
 
-  function getAllConfig() {
-    var files = {};
-    _.each(_.keys(config.modules), function(moduleName) {
-      files['generated/dist/js/' + moduleName + '.min.js'] = ['generated/dist/js/' + moduleName + '.js'];
-    });
-    return {
-      files: files
-    };
-  }
-
-  return {
-    all: getAllConfig()
+  var uglify = {
   };
+
+  var distJsPath = 'generated/dist/js/';
+
+  config.mapModulesWithTemplate('<%= moduleName %>').forEach(function (moduleName) {
+    var minPath = distJsPath + moduleName + '.min.js';
+    var path = distJsPath + moduleName + '.js';
+
+    uglify[moduleName] = {
+      files: {}
+    };
+    uglify[moduleName].files[minPath] = [path];
+  });
+
+  return uglify;
 };
