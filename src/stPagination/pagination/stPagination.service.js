@@ -1,3 +1,4 @@
+/* eslint no-invalid-this: 0 */
 angular.module('stPagination')
   .provider('stPagination', function (stPaginationInternalProvider) {
     'use strict';
@@ -22,7 +23,7 @@ angular.module('stPagination')
 
     function checkTemplateConfig(templateConfig) {
       if (!templateConfig || !angular.isObject(templateConfig)) {
-        throw new Error('Template config value ' + JSON.stringify(templateConfig) + ' is not allowed');
+        throw new Error('Template config value ' + angular.toJson(templateConfig) + ' is not allowed');
       }
       var attributesCount = countConfigAttributes(templateConfig);
       if (attributesCount > 1) {
@@ -30,7 +31,7 @@ angular.module('stPagination')
           'Use only of of: template, templateUrl, templateConfig, templateKey');
       }
       if (attributesCount === 0) {
-        throw new Error('Missing config attribute for ' + JSON.stringify(templateConfig) + '. ' +
+        throw new Error('Missing config attribute for ' + angular.toJson(templateConfig) + '. ' +
           'Expected one of: template, templateUrl, templateConfig, templateKey');
       }
     }

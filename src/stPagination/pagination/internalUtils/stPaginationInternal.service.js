@@ -1,3 +1,4 @@
+/* eslint no-invalid-this: 0 */
 angular.module('stPagination').provider('stPaginationInternal', function () {
   'use strict';
 

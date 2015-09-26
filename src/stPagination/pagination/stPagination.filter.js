@@ -109,7 +109,7 @@ angular.module('stPagination').filter('stPagination', function (stPagination) {
     var collectionWithPaginationHandle;
 
     if (!inputCollection) {
-      return;
+      return inputCollection;
     }
 
     collectionWithPaginationHandle = originalCollection || inputCollection;
