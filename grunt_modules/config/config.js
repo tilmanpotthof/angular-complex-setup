@@ -98,6 +98,7 @@ module.exports = (function() {
   }
 
   addModule('helloWorld');
+  addModule('stPagination');
   addModule('demoApp').withDependencies(['helloWorld']).withTemplates();
 
   return config;
