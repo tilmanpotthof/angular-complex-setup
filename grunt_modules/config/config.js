@@ -108,8 +108,11 @@ module.exports = (function() {
   }
 
   addModule('helloWorld');
-  addModule('stPagination');
   addModule('demoApp').withDependencies(['helloWorld']).withTemplates();
+
+  addModule('stPagination');
+  addModule('stPaginationDemoApp').withDependencies(['stPagination']).withTemplates();
+
 
   return config;
 })();
