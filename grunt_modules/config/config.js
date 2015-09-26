@@ -50,6 +50,7 @@ module.exports = (function() {
   function BuildModule(moduleName) {
     this.moduleName = moduleName;
     this.src = [CONSTANTS.MODULE_SRC(this), CONSTANTS.INTERNAL_SRC(this), CONSTANTS.SRC_WITHOUT_SPEC(this)];
+    this.srcWithoutSpec = CONSTANTS.SRC_WITHOUT_SPEC(this);
     this.dest = CONSTANTS.DEST(this);
     this.minDest = CONSTANTS.MIN_DEST(this);
     this.spec = [CONSTANTS.TEST_SPEC(this)];
