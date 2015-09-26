@@ -51,7 +51,7 @@ describe('Directive: pagination', function () {
 
   describe('displayIndex', function () {
     var $simplePaginationScope;
-    beforeEach(function() {
+    beforeEach(function () {
       $simplePaginationScope = $simplePagination.isolateScope();
     });
     it('should increment a index by 1', function () {
@@ -60,7 +60,7 @@ describe('Directive: pagination', function () {
     });
 
     it('should return "..." for an array', function () {
-      expect($simplePaginationScope.displayIndex([1,2,3])).toBe('...');
+      expect($simplePaginationScope.displayIndex([1, 2, 3])).toBe('...');
     });
 
     it('should pass other values', function () {
@@ -74,7 +74,7 @@ describe('Directive: pagination', function () {
     var $prev, $page1, $page2, $page3, $next;
 
     beforeEach(function () {
-      $scope.commits = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+      $scope.commits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
       $filter('stPagination')($scope.commits);
       $scope.commits.pagination.setPage(1);
       $scope.$apply();

@@ -16,6 +16,7 @@ describe('Directive: paginationLimit', function () {
     });
     return optionValueByText;
   }
+
   var $scope, $basicPaginationLimit, $directiveScope, $compile, $filter, Pagination;
 
   // Initialize the controller and a mock scope
@@ -39,13 +40,13 @@ describe('Directive: paginationLimit', function () {
   });
 
   it('should set default limits to [10,20,50]', function () {
-    expect($directiveScope.limits()).toEqual([10,20,50]);
+    expect($directiveScope.limits()).toEqual([10, 20, 50]);
   });
 
   it('should allow to set the limits to different value', function () {
     var tmpl = '<st-pagination-limit collection="commits" limits="[10,20,50,100]"></st-pagination-limit>';
     var $element = $compile(tmpl)($scope);
-    expect($element.isolateScope().limits()).toEqual([10,20,50,100]);
+    expect($element.isolateScope().limits()).toEqual([10, 20, 50, 100]);
   });
 
   it('should extract pagination object correctly from the collection', function () {

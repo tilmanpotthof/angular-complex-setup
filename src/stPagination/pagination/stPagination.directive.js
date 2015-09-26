@@ -1,4 +1,4 @@
-angular.module('stPagination').directive('stPagination', function(stPagination) {
+angular.module('stPagination').directive('stPagination', function (stPagination, stPaginationTemplateConfigUtil) {
   'use strict';
 
   var css3UserSelectAliases = [
@@ -118,11 +118,11 @@ angular.module('stPagination').directive('stPagination', function(stPagination) 
       edgeRange: '=',
       midRange: '='
     },
-    template: templateConfigUtil.getTemplate(stPagination.templateConfig()),
-    templateUrl: templateConfigUtil.getTemplateUrl(stPagination.templateConfig()),
-    controller: function($scope, $element, $attrs) {
+    template: stPaginationTemplateConfigUtil.getTemplate(stPagination.templateConfig()),
+    templateUrl: stPaginationTemplateConfigUtil.getTemplateUrl(stPagination.templateConfig()),
+    controller: function ($scope, $element, $attrs) {
       // set css to prevent selections
-      angular.forEach(css3UserSelectAliases, function(alias) {
+      angular.forEach(css3UserSelectAliases, function (alias) {
         $element.css(alias, 'none');
       });
 
@@ -134,7 +134,7 @@ angular.module('stPagination').directive('stPagination', function(stPagination) 
         return $scope.$eval('pagination.reducedIndices(midRange, edgeRange)');
       };
 
-      $scope.$watch('collection', function(collection) {
+      $scope.$watch('collection', function (collection) {
         if (angular.isArray(collection)) {
           if (stPagination.hasPagination(collection)) {
             $scope.pagination = collection.pagination;
