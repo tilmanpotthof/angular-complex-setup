@@ -27,6 +27,9 @@ module.exports = (function() {
     ],
     modules: {
     },
+    eachModule: function (fn) {
+      _.each(this.modules, fn);
+    },
     mapModulesWithTemplate: function (template) {
       var compiledTemplate = _.template(template);
       return _.map(config.modules, function (module) {
