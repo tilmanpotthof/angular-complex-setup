@@ -4,21 +4,20 @@ module.exports = (function() {
   var config = require('./config/config.js');
   var _ = require('underscore');
 
-  function getTestsourcePaths (module, circularityCheck) {
-    var sourcePaths = module.getSourcesWithDependencies()
-    return sourcePaths;
-  }
-
   function getModuleTestfiles(module) {
-    return config.npmComponents
+    return config.npmDevJquery
+      .concat(config.npmComponents)
       .concat(config.npmDevComponents)
+      .concat(config.jasmineMatchers)
       .concat(module.getSourcesWithDependencies())
       .concat(module.spec);
   }
 
   function getModuleMinTestfiles(module) {
-    return config.npmComponents
+    return config.npmDevJquery
+      .concat(config.npmComponents)
       .concat(config.npmDevComponents)
+      .concat(config.jasmineMatchers)
       .concat(module.minDest)
       .concat(module.spec);
   }
@@ -26,19 +25,22 @@ module.exports = (function() {
   var karmaTasks = {
   };
 
-  _.each(config.modules, function (modulePaths, moduleName) {
+  _.each(config.modules, function (module, moduleName) {
     karmaTasks[moduleName] = {
       options: {
         configFile: 'karma.conf.js',
+        preprocessors: {},
         coverageReporter: {
           reporters: [
             {type: 'text', dir: 'generated/reports/coverage'},
             {type: 'lcov', dir: 'generated/reports/coverage/lcov/' + moduleName}
           ]
         },
-        files: getModuleTestfiles(modulePaths)
+        files: getModuleTestfiles(module)
       }
     };
+
+    karmaTasks[moduleName].options.preprocessors[module.srcWithoutSpec] = 'coverage';
 
     karmaTasks[moduleName + 'Min'] = {
       options: {
@@ -46,7 +48,7 @@ module.exports = (function() {
         coverageReporter: {
           reporters: []
         },
-        files: getModuleMinTestfiles(modulePaths)
+        files: getModuleMinTestfiles(module)
       }
     };
   });
