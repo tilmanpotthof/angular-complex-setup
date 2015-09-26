@@ -37,7 +37,6 @@ module.exports = (function() {
 
   var CONSTANTS = {
     MODULE_SRC: _.template('src/<%= moduleName %>/**/*.module.js'),
-    INTERNAL_SRC: _.template('src/<%= moduleName %>/**/*.internal.js'),
     DEST: _.template('generated/dist/js/<%= moduleName %>.js'),
     MIN_DEST: _.template('generated/dist/js/<%= moduleName %>.min.js'),
     SRC_WITHOUT_SPEC: _.template('src/<%= moduleName %>/**/!(*.spec).js'),
@@ -49,7 +48,7 @@ module.exports = (function() {
 
   function BuildModule(moduleName) {
     this.moduleName = moduleName;
-    this.src = [CONSTANTS.MODULE_SRC(this), CONSTANTS.INTERNAL_SRC(this), CONSTANTS.SRC_WITHOUT_SPEC(this)];
+    this.src = [CONSTANTS.MODULE_SRC(this), CONSTANTS.SRC_WITHOUT_SPEC(this)];
     this.srcWithoutSpec = CONSTANTS.SRC_WITHOUT_SPEC(this);
     this.dest = CONSTANTS.DEST(this);
     this.minDest = CONSTANTS.MIN_DEST(this);
