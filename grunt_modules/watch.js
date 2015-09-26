@@ -41,7 +41,8 @@ module.exports = (function() {
       tasks: [
         'eslint:' + moduleName + 'Dev',
         'concat:' + moduleName,
-        'ugglify:' + moduleName,
+        'uglify:' + moduleName,
+        'uglify:' + moduleName + 'Min',
         'karma:' + moduleName
       ]
     };
