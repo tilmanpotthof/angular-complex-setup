@@ -4,21 +4,20 @@ module.exports = (function() {
   var config = require('./config/config.js');
   var _ = require('underscore');
 
-  function getTestsourcePaths (module, circularityCheck) {
-    var sourcePaths = module.getSourcesWithDependencies()
-    return sourcePaths;
-  }
-
   function getModuleTestfiles(module) {
-    return config.npmComponents
+    return config.npmDevJquery
+      .concat(config.npmComponents)
       .concat(config.npmDevComponents)
+      .concat(config.jasmineMatchers)
       .concat(module.getSourcesWithDependencies())
       .concat(module.spec);
   }
 
   function getModuleMinTestfiles(module) {
-    return config.npmComponents
+    return config.npmDevJquery
+      .concat(config.npmComponents)
       .concat(config.npmDevComponents)
+      .concat(config.jasmineMatchers)
       .concat(module.minDest)
       .concat(module.spec);
   }

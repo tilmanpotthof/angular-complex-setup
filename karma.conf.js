@@ -33,7 +33,7 @@ module.exports = function(config) {
       'karma-coverage'
     ],
     preprocessors: {
-      'src/app/**/!(*spec).js': 'coverage'
+      'src/**/!(*spec).js': 'coverage'
     },
     coverageReporter: {
       reporters: [
