@@ -97,7 +97,8 @@ module.exports = (function() {
     return module;
   }
 
-  addModule('helloWorld').withTemplates();
+  addModule('helloWorld');
+  addModule('demoApp').withDependencies(['helloWorld']).withTemplates();
 
   return config;
 })();
