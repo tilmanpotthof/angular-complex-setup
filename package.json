@@ -51,14 +51,16 @@
     "angular",
     "setup"
   ],
-  "license": "PRIVATE",
-  "private": true,
+  "license": "MIT",
+  "pre-commit": [
+    "grunt"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tilmanpotthof/angular-workshop-setup.git"
   },
   "scripts": {
     "grunt": "node_modules/.bin/grunt",
-    "karma": "node_modules/karma/bin/karma"
+    "test": "node_modules/.bin/grunt test"
   }
 }

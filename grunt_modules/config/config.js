@@ -14,9 +14,17 @@ module.exports = (function() {
     'npmDevComponents': [
       'node_modules/angular-mocks/angular-mocks.js'
     ],
+    'npmDocsComponents': [
+      'node_modules/angular-animate/angular-animate.js',
+      'node_modules/angular-route/angular-route.js'
+    ],
     jasmineMatchers: [
       'src/customMatchers.js'
     ],
+    vendor: {
+      all: 'generated/dist/vendor.js',
+      docs: 'generated/dist/docsVendor.js'
+    },
     'all': [
       'src/**/*.module.js',
       'src/**/!(*.spec).js',

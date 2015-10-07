@@ -2,7 +2,7 @@ module.exports = {
 	server: {
     options: {
       port: 8181,
-      open: 'http://localhost:8181/example-pages/',
+      open: 'http://localhost:8181/demos/',
       middleware: function (connect, options) {
         'use strict';
 
@@ -23,21 +23,12 @@ module.exports = {
 
         return middlewares;
       }
-    },
-    proxies: [
-      {
-        context: '/api',
-        host: '127.0.0.1',
-        port: 8001,
-        rewrite: {
-          '/api' : '/'
-        }
-      }
-    ]
+    }
   },
   docs: {
     options: {
-      open: 'http://localhost:8000/generated/docs/#'
+      port: 8181,
+      open: 'http://localhost:8181/generated/docs/#'
     }
   }
 };
