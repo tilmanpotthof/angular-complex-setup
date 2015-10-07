@@ -7,11 +7,15 @@ module.exports = function() {
   var concatOptions = {
     vendor: {
       src: config.npmComponents,
-      dest: 'generated/dist/js/vendor.js'
+      dest: 'generated/dist/vendor/vendor.js'
+    },
+    docsVendor: {
+      src: config.npmDocsComponents,
+      dest: 'generated/dist/vendor/docsVendor.js'
     }
   };
 
-  _.each(config.modules, function(module, moduleName) {
+  config.eachModule(function(module, moduleName) {
     concatOptions[moduleName] = {
       src: module.getSourcesWithDependencies(),
       dest: module.dest
