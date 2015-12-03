@@ -28,6 +28,7 @@
     "grunt-contrib-uglify": "0.11.0",
     "grunt-contrib-watch": "0.6.1",
     "grunt-deps-ok": "0.9.0",
+    "grunt-flow": "tilmanpotthof/grunt-flow",
     "grunt-karma": "0.12.1",
     "grunt-karma-coveralls": "2.5.4",
     "grunt-ng-annotate": "1.0.1",
