@@ -1,4 +1,4 @@
-angular.module('demoApp').directive('demoApp', function (helloWorldService) {
+angular.module('demoApp').directive('demoApp', function (helloWorldService: HelloWorldService) {
   'use strict';
 
   return {
@@ -6,6 +6,8 @@ angular.module('demoApp').directive('demoApp', function (helloWorldService) {
     templateUrl: 'demoApp/demoApp.html',
     link: function (scope) {
       scope.helloWorld = helloWorldService.helloWorld;
+
+      helloWorldService.helloWorld('hello');
     }
   };
 });

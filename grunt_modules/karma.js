@@ -40,7 +40,7 @@ module.exports = (function() {
       }
     };
 
-    karmaTasks[moduleName].options.preprocessors[module.srcWithoutSpec] = 'coverage';
+    karmaTasks[moduleName].options.preprocessors[module.srcWithoutSpec] =  ['babel', 'coverage'];
 
     karmaTasks[moduleName + 'Min'] = {
       options: {

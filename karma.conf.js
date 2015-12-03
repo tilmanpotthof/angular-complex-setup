@@ -15,7 +15,20 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-phantomjs-launcher',
-      'karma-coverage'
-    ]
+      'karma-coverage',
+      'karma-babel-preprocessor'
+    ],
+    babelPreprocessor: {
+      options: {
+        plugins: ['transform-flow-strip-types'],
+        sourceMap: 'inline'
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
+    }
   });
 };

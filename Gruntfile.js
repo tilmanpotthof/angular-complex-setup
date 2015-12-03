@@ -16,6 +16,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'ngtemplates',
     'concat',
+    'babel',
     'ngdocs'
   ]);
 

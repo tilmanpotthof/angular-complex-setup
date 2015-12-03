@@ -1,0 +1,9 @@
+[ignore]
+.*.spec.js
+
+[include]
+
+[libs]
+interfaces/
+
+[options]

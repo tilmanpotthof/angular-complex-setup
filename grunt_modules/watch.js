@@ -38,6 +38,7 @@ module.exports = (function() {
   config.eachModule(function (module, moduleName) {
     var buildTasks = [
       'concat:' + moduleName,
+      'babel:' + moduleName,
       'ngAnnotate:' + moduleName,
       'uglify:' + moduleName,
       'uglify:' + moduleName + 'Min',
