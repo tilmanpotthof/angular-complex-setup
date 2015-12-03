@@ -13,7 +13,13 @@ module.exports = function () {
     ngtemplates[moduleName] = {
       cwd: 'src',
       src: module.templates.src.replace(/^src\//, ''),
-      dest: module.templates.dest
+      dest: module.templates.dest,
+      options: {
+        htmlmin: {
+          collapseWhitespace:             true,
+          removeComments:                 true // Only if you don't use comment directives!
+        }
+      }
     };
   });
 
