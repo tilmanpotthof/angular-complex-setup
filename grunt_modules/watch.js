@@ -37,6 +37,7 @@ module.exports = (function() {
 
   config.eachModule(function (module, moduleName) {
     var buildTasks = [
+      'flow',
       'concat:' + moduleName,
       'babel:' + moduleName,
       'ngAnnotate:' + moduleName,
